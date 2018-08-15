@@ -1,97 +1,9 @@
-// 'use strict';
-// // // dependencies
-//  //var express = require('express');
-//  //var https = require('http');
-// // var path = require('path');
-// // var request = require('request');
-// // var app = express();
-
-// // // all environments
-// // app.set('port', 3000);
-// // app.set('views', __dirname + '/views');
-// // app.set('view engine', 'jade');
-// // app.use(express.favicon());
-// // app.use(express.logger('dev'));
-// // app.use(express.bodyParser());
-// // app.use(express.methodOverride());
-// // app.use(app.router);
-// // app.use(express.static(path.join(__dirname, 'public')));
-
-// // // development only
-// // if ('development' == app.get('env')) {
-// //   app.use(express.errorHandler());
-// // }
-
-// // // first route
-// // app.get('/', function(req, res) {res.render('index')});
-
-
-// // https.createServer(app).listen(app.get('port'), function(){
-// //   console.log('Express server listening on port ' + app.get('port'));
-// // });
-
-
-
-
-// var os = require('os');
-// var nodeStatic = require('node-static');
-// var http = require('http');
-
-// var express = require("express");
-
-// var router = express.Router();
-
-
-// var fileServer = new(nodeStatic.Server)();
-// var app = http.createServer(function(req, res) {
-//   fileServer.serve(req, res);
-//   console.log("Your server is running on 8081 port.....")
-// }).listen(8081);
-
-// console.log("app",app)
-
-// app.use(express.static('public'))
-// // // first route
-//  //app.use(app.router);
-//  //app.router.get('/', function(req, res) {res.render('index')});
-//  //app.router.get('/about',function(req,res){res.render('about')});
-//  //app.router.get('/contact',function(req,res){res.render('contact')})
-// // app.set('port', 3000);
-// // app.set('views', __dirname + '/views');
-// // app.set('view engine', 'jade');
-// // app.use(express.favicon());
-// // app.use(express.logger('dev'));
-// // app.use(express.bodyParser());
-// // app.use(express.methodOverride());
-
-// // app.use(express.static(path.join(__dirname, 'public')));
-
-// // // development only
-// // if ('development' == app.get('env')) {
-// //   app.use(express.errorHandler());
-// // }
-
-// // // first route
-// // app.get('/', function(req, res) {res.render('index')});
-
-
 
 var express = require('express');
 var path = require('path');
 var app = express();
  var socketIO = require('socket.io');
  var nodemailer = require('nodemailer');
-// // app.set('views', __dirname + './views');
-//  //app.use(express.static(path.join(__dirname, 'public')));
-//  app.set('views', __dirname + 'Views');
-//  app.set('view engine', 'ejs');
-
-
-// Require static assets from public folder
-//app.use(express.static(path.join(__dirname, '/public')));
-
-// Set 'views' directory for any views 
-// being rendered res.render()
 
 app.use("/public", express.static(__dirname + '/public'));
 
@@ -125,8 +37,8 @@ app.get('/sendEmail',function (req,res) {
   var transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-      user: 'mailpayalverma@gmail.com',
-      pass: 'Payal20031986'
+      user: 'watchyourstepsdeveloper@gmail.com',
+      pass: 'Steps@54321'
     }
   });
   
@@ -144,18 +56,17 @@ app.get('/sendEmail',function (req,res) {
       console.log('Email sent: ' + info.response);
     }
   });
+  alert("Email sent to Payal Verma")
   res.render('index')
 
 })
 
 
-//var server = app.listen(8080);
 
 
 var io = socketIO.listen(server);
 io.sockets.on('connection', function(socket) {
 
-  // convenience function to log server messages on the client
   function log() {
     var array = ['Message from server:'];
     array.push.apply(array, arguments);
@@ -164,7 +75,6 @@ io.sockets.on('connection', function(socket) {
 
   socket.on('message', function(message) {
     log('Client said: ', message);
-    // for a real app, would be room-only (not broadcast)
     socket.broadcast.emit('message', message);
   });
 
