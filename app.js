@@ -102,7 +102,9 @@ app.set('views', path.join(__dirname , 'Views'));
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
 
-var server = app.listen(process.env.PORT || 8080, function(){
+let server = require('http').Server(app);
+
+server.listen(process.env.PORT || 8080, function(){
   console.log("Express server listening on port ",process.env.PORT);
 });
 
