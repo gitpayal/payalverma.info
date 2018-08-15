@@ -102,6 +102,9 @@ app.set('views', path.join(__dirname , 'Views'));
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
 
+var server = app.listen(process.env.PORT || 8080, function(){
+  console.log("Express server listening on port ",process.env.PORT);
+});
 
 app.get('/', function(req, res){
   res.render('index')
@@ -143,9 +146,7 @@ app.get('/sendEmail',function (req,res) {
 
 })
 
-var server = app.listen(process.env.PORT || 8080, function(){
-  console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
-});
+
 //var server = app.listen(8080);
 
 
